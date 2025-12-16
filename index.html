@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neal's Page - Coding Practice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Coding Practice</h1>
+        <h2>Neal's Page</h2>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li class="dropdown">
+                    <a href="#about">About</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#about">About This Page</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h3>Welcome!</h3>
+            <p>This is my coding practice page. I'm relearning HTML and CSS.</p>
+            <p>Feel free to modify this page to practice your skills!</p>
+        </section>
+
+        <section id="about">
+            <h3>About This Page</h3>
+            <p>This page demonstrates basic HTML structure and CSS styling:</p>
+            <ul>
+                <li>Semantic HTML elements (header, main, section, footer)</li>
+                <li>Navigation menu</li>
+                <li>Styled sections with colors and spacing</li>
+                <li>A contact form</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h3>Contact Form</h3>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your name">
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com">
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" placeholder="Your message here"></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Neal's Coding Practice. All rights reserved.</p>
+    </footer>
+</body>
+</html>
