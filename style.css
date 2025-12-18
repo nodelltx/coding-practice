@@ -12,6 +12,15 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Home page background */
+body.home-page {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 /* Header styles */
 header {
     background-color: #2c3e50;
@@ -150,6 +159,21 @@ button {
 
 button:hover {
     background-color: #b92929;
+}
+
+/* Project card styles */
+.project-card {
+    border-left: 4px solid #3498db;
+}
+
+.status-badge {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
 /* Footer styles */
