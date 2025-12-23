@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Outdoor Gear & Apparel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="duck-hunting.html">Duck Hunting</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-content">
+            <div class="checkout-forms">
+                <h2>Complete Your Order</h2>
+
+                <section class="checkout-section">
+                    <h3>Billing Information</h3>
+                    <form class="checkout-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="billing-first-name">First Name *</label>
+                                <input type="text" id="billing-first-name" name="billing-first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="billing-last-name">Last Name *</label>
+                                <input type="text" id="billing-last-name" name="billing-last-name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="billing-email">Email Address *</label>
+                            <input type="email" id="billing-email" name="billing-email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="billing-phone">Phone Number *</label>
+                            <input type="tel" id="billing-phone" name="billing-phone" placeholder="(123) 456-7890" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="billing-address">Street Address *</label>
+                            <input type="text" id="billing-address" name="billing-address" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="billing-city">City *</label>
+                                <input type="text" id="billing-city" name="billing-city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="billing-state">State *</label>
+                                <input type="text" id="billing-state" name="billing-state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="billing-zip">ZIP Code *</label>
+                                <input type="text" id="billing-zip" name="billing-zip" required>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="checkout-section">
+                    <h3>Shipping Information</h3>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="same-as-billing" checked>
+                        Same as billing address
+                    </label>
+
+                    <form class="checkout-form shipping-form" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="shipping-first-name">First Name *</label>
+                                <input type="text" id="shipping-first-name" name="shipping-first-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-last-name">Last Name *</label>
+                                <input type="text" id="shipping-last-name" name="shipping-last-name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipping-address">Street Address *</label>
+                            <input type="text" id="shipping-address" name="shipping-address">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="shipping-city">City *</label>
+                                <input type="text" id="shipping-city" name="shipping-city">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-state">State *</label>
+                                <input type="text" id="shipping-state" name="shipping-state">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping-zip">ZIP Code *</label>
+                                <input type="text" id="shipping-zip" name="shipping-zip">
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="checkout-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="credit-card" checked>
+                            <span>Credit/Debit Card</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="paypal">
+                            <span>PayPal</span>
+                        </label>
+                    </div>
+
+                    <form class="checkout-form payment-form">
+                        <div class="form-group">
+                            <label for="card-number">Card Number *</label>
+                            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Expiration Date *</label>
+                                <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvv">CVV *</label>
+                                <input type="text" id="card-cvv" name="card-cvv" placeholder="123" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="card-name">Name on Card *</label>
+                            <input type="text" id="card-name" name="card-name" required>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <div class="order-summary-sidebar">
+                <h3>Order Summary</h3>
+
+                <div class="summary-items">
+                    <div class="summary-item">
+                        <span class="item-name">Premium Duck Decoys Set (x1)</span>
+                        <span class="item-price">$89.99</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="item-name">Waterproof Hunting Jacket (x1)</span>
+                        <span class="item-price">$129.99</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="item-name">Fishing Rod Combo (x2)</span>
+                        <span class="item-price">$119.98</span>
+                    </div>
+                </div>
+
+                <div class="summary-totals">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span>$339.96</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span>$15.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax:</span>
+                        <span>$28.40</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span>$383.36</span>
+                    </div>
+                </div>
+
+                <button class="place-order-btn">Place Order</button>
+                <a href="shopping-cart.html" class="back-to-cart">Back to Cart</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Outdoor Gear & Apparel. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -783,6 +783,7 @@ button:hover {
 }
 
 .checkout-btn {
+    display: block;
     width: 100%;
     background-color: #044c20;
     color: white;
@@ -794,6 +795,8 @@ button:hover {
     font-weight: bold;
     transition: background-color 0.3s;
     margin-top: 1.5rem;
+    text-align: center;
+    text-decoration: none;
 }
 
 .checkout-btn:hover {
@@ -845,6 +848,164 @@ button:hover {
 
 .return-to-store-btn:hover {
     background-color: #2980b9;
+}
+
+/* Checkout page styles */
+.checkout-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.checkout-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.checkout-forms h2 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+}
+
+.checkout-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.checkout-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.75rem;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.payment-options {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.payment-option:hover {
+    border-color: #3498db;
+    background-color: #f8f9fa;
+}
+
+.payment-option input[type="radio"] {
+    cursor: pointer;
+}
+
+.payment-option span {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.order-summary-sidebar {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.order-summary-sidebar h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.75rem;
+}
+
+.summary-items {
+    margin-bottom: 1.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+    gap: 1rem;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.item-price {
+    color: #044c20;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.summary-totals {
+    border-top: 2px solid #ddd;
+    padding-top: 1rem;
+}
+
+.place-order-btn {
+    width: 100%;
+    background-color: #044c20;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 1.5rem;
+}
+
+.place-order-btn:hover {
+    background-color: #033a18;
+}
+
+.back-to-cart {
+    display: block;
+    text-align: center;
+    color: #3498db;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: color 0.3s;
+}
+
+.back-to-cart:hover {
+    color: #2980b9;
+    text-decoration: underline;
 }
 
 /* Footer styles */
