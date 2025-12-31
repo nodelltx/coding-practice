@@ -244,6 +244,26 @@ button:hover {
     margin-bottom: 1rem;
 }
 
+.store-locator-link {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f0f8f4;
+    border-left: 4px solid #044c20;
+    border-radius: 4px;
+    font-size: 1.05rem;
+}
+
+.store-locator-link a {
+    color: #044c20;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.store-locator-link a:hover {
+    color: #033a18;
+    text-decoration: underline;
+}
+
 .featured-products {
     background-color: white;
     padding: 2rem;
@@ -1006,6 +1026,223 @@ button:hover {
 .back-to-cart:hover {
     color: #2980b9;
     text-decoration: underline;
+}
+
+/* Store Locator page styles */
+.locator-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.locator-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.locator-header h2 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.locator-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.search-controls {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#address-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#address-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.search-button,
+.nearest-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.search-button:hover {
+    background-color: #2980b9;
+}
+
+.nearest-button {
+    background-color: #044c20;
+    color: white;
+}
+
+.nearest-button:hover {
+    background-color: #033a18;
+}
+
+.locator-content {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    min-height: 600px;
+}
+
+.store-list {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.store-list h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.75rem;
+}
+
+.store-item {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.store-item:hover {
+    border-color: #3498db;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.store-item.nearest {
+    border-color: #044c20;
+    background-color: #f0f8f4;
+    box-shadow: 0 4px 12px rgba(4, 76, 32, 0.2);
+}
+
+.store-item h4 {
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.store-address {
+    color: #666;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.store-phone,
+.store-hours {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.directions-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 0.75rem;
+}
+
+.directions-btn:hover {
+    background-color: #2980b9;
+}
+
+.map-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-height: 600px;
+    position: relative;
+}
+
+.api-key-notice {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.api-key-notice h3 {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.api-key-notice h4 {
+    color: #2c3e50;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.api-key-notice ol {
+    text-align: left;
+    max-width: 600px;
+    margin: 1rem auto;
+    line-height: 1.8;
+}
+
+.api-key-notice ol li {
+    margin-bottom: 0.5rem;
+}
+
+.api-key-notice code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #e74c3c;
+}
+
+.api-key-notice a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.api-key-notice a:hover {
+    text-decoration: underline;
+}
+
+.api-key-notice .note {
+    margin-top: 1.5rem;
+    color: #044c20;
+    font-weight: bold;
+    font-style: italic;
 }
 
 /* Footer styles */

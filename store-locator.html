@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Locator - Find Your Nearest Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Store Locator</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="duck-hunting.html">Duck Hunting</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="locator-container">
+        <div class="locator-header">
+            <h2>Find a Store Near You</h2>
+            <p>Visit one of our locations to see our products in person and talk with our outdoor experts!</p>
+        </div>
+
+        <div class="search-controls">
+            <input type="text" id="address-input" placeholder="Enter your address or ZIP code">
+            <button id="search-btn" class="search-button">Search</button>
+            <button id="nearest-btn" class="nearest-button">Find Nearest Store</button>
+        </div>
+
+        <div class="locator-content">
+            <div class="store-list">
+                <h3>Our Locations</h3>
+                <div id="stores-container">
+                    <div class="store-item" data-store-id="0">
+                        <h4>Houston, TX</h4>
+                        <p class="store-address">789 Westheimer Rd<br>Houston, TX 77056</p>
+                        <p class="store-phone">📞 (713) 555-0100</p>
+                        <p class="store-hours">Mon-Sat: 8am-9pm, Sun: 10am-7pm</p>
+                        <button class="directions-btn" onclick="getDirections(0)">Get Directions</button>
+                    </div>
+
+                    <div class="store-item" data-store-id="1">
+                        <h4>Corpus Christi, TX</h4>
+                        <p class="store-address">456 Ocean Drive<br>Corpus Christi, TX 78401</p>
+                        <p class="store-phone">📞 (361) 555-0200</p>
+                        <p class="store-hours">Mon-Sat: 8am-8pm, Sun: 10am-6pm</p>
+                        <button class="directions-btn" onclick="getDirections(1)">Get Directions</button>
+                    </div>
+
+                    <div class="store-item" data-store-id="2">
+                        <h4>New Orleans, LA</h4>
+                        <p class="store-address">555 Canal Street<br>New Orleans, LA 70130</p>
+                        <p class="store-phone">📞 (504) 555-0300</p>
+                        <p class="store-hours">Mon-Sat: 9am-9pm, Sun: 11am-7pm</p>
+                        <button class="directions-btn" onclick="getDirections(2)">Get Directions</button>
+                    </div>
+
+                    <div class="store-item" data-store-id="3">
+                        <h4>Biloxi, MS</h4>
+                        <p class="store-address">123 Beach Boulevard<br>Biloxi, MS 39530</p>
+                        <p class="store-phone">📞 (228) 555-0400</p>
+                        <p class="store-hours">Mon-Sat: 8am-8pm, Sun: 10am-6pm</p>
+                        <button class="directions-btn" onclick="getDirections(3)">Get Directions</button>
+                    </div>
+
+                    <div class="store-item" data-store-id="4">
+                        <h4>Destin, FL</h4>
+                        <p class="store-address">321 Harbor Boulevard<br>Destin, FL 32541</p>
+                        <p class="store-phone">📞 (850) 555-0500</p>
+                        <p class="store-hours">Mon-Sat: 9am-9pm, Sun: 11am-7pm</p>
+                        <button class="directions-btn" onclick="getDirections(4)">Get Directions</button>
+                    </div>
+
+                    <div class="store-item" data-store-id="5">
+                        <h4>Key West, FL</h4>
+                        <p class="store-address">888 Duval Street<br>Key West, FL 33040</p>
+                        <p class="store-phone">📞 (305) 555-0600</p>
+                        <p class="store-hours">Mon-Sat: 8am-8pm, Sun: 10am-6pm</p>
+                        <button class="directions-btn" onclick="getDirections(5)">Get Directions</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="map" class="map-container">
+                <!-- Google Map will be loaded here -->
+                <div class="api-key-notice">
+                    <h3>⚠️ Setup Required</h3>
+                    <p>To use the interactive map, you need a Google Maps API key.</p>
+                    <h4>Quick Setup Steps:</h4>
+                    <ol>
+                        <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                        <li>Create a new project (or select existing)</li>
+                        <li>Enable "Maps JavaScript API"</li>
+                        <li>Go to "Credentials" and create an API key</li>
+                        <li>Copy your API key</li>
+                        <li>Open <code>store-locator.html</code> and replace <code>YOUR_API_KEY_HERE</code> with your actual key</li>
+                    </ol>
+                    <p class="note">Note: Google Maps offers $200 free credit per month, which covers most small business needs!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Outdoor Gear & Apparel. All rights reserved.</p>
+    </footer>
+
+    <!-- Google Maps API - Replace YOUR_API_KEY_HERE with your actual API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&libraries=places&callback=initMap" async defer></script>
+
+    <script>
+        // Store locations data
+        const stores = [
+            {
+                name: "Houston, TX",
+                address: "789 Westheimer Rd, Houston, TX 77056",
+                lat: 29.7604,
+                lng: -95.3698,
+                phone: "(713) 555-0100",
+                hours: "Mon-Sat: 8am-9pm, Sun: 10am-7pm"
+            },
+            {
+                name: "Corpus Christi, TX",
+                address: "456 Ocean Drive, Corpus Christi, TX 78401",
+                lat: 27.8006,
+                lng: -97.3964,
+                phone: "(361) 555-0200",
+                hours: "Mon-Sat: 8am-8pm, Sun: 10am-6pm"
+            },
+            {
+                name: "New Orleans, LA",
+                address: "555 Canal Street, New Orleans, LA 70130",
+                lat: 29.9511,
+                lng: -90.0715,
+                phone: "(504) 555-0300",
+                hours: "Mon-Sat: 9am-9pm, Sun: 11am-7pm"
+            },
+            {
+                name: "Biloxi, MS",
+                address: "123 Beach Boulevard, Biloxi, MS 39530",
+                lat: 30.3960,
+                lng: -88.8853,
+                phone: "(228) 555-0400",
+                hours: "Mon-Sat: 8am-8pm, Sun: 10am-6pm"
+            },
+            {
+                name: "Destin, FL",
+                address: "321 Harbor Boulevard, Destin, FL 32541",
+                lat: 30.3935,
+                lng: -86.4958,
+                phone: "(850) 555-0500",
+                hours: "Mon-Sat: 9am-9pm, Sun: 11am-7pm"
+            },
+            {
+                name: "Key West, FL",
+                address: "888 Duval Street, Key West, FL 33040",
+                lat: 24.5551,
+                lng: -81.7800,
+                phone: "(305) 555-0600",
+                hours: "Mon-Sat: 8am-8pm, Sun: 10am-6pm"
+            }
+        ];
+
+        let map;
+        let markers = [];
+        let geocoder;
+        let userLocation;
+
+        // Initialize map
+        function initMap() {
+            // Center map on Gulf coast region
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 28.5, lng: -89.5 },
+                zoom: 5
+            });
+
+            geocoder = new google.maps.Geocoder();
+
+            // Add markers for all stores
+            stores.forEach((store, index) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: store.lat, lng: store.lng },
+                    map: map,
+                    title: store.name,
+                    animation: google.maps.Animation.DROP
+                });
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div style="padding: 10px;">
+                            <h3 style="margin: 0 0 10px 0; color: #2c3e50;">${store.name}</h3>
+                            <p style="margin: 5px 0;"><strong>Address:</strong><br>${store.address}</p>
+                            <p style="margin: 5px 0;"><strong>Phone:</strong> ${store.phone}</p>
+                            <p style="margin: 5px 0;"><strong>Hours:</strong> ${store.hours}</p>
+                            <button onclick="getDirections(${index})" style="
+                                background-color: #044c20;
+                                color: white;
+                                padding: 8px 16px;
+                                border: none;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                margin-top: 10px;
+                            ">Get Directions</button>
+                        </div>
+                    `
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+
+                markers.push(marker);
+            });
+        }
+
+        // Search by address
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const address = document.getElementById('address-input').value;
+            if (!address) {
+                alert('Please enter an address or ZIP code');
+                return;
+            }
+
+            geocoder.geocode({ address: address }, function(results, status) {
+                if (status === 'OK') {
+                    userLocation = results[0].geometry.location;
+                    map.setCenter(userLocation);
+                    map.setZoom(10);
+
+                    // Add marker for user location
+                    new google.maps.Marker({
+                        map: map,
+                        position: userLocation,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    });
+
+                    findNearestStore(userLocation);
+                } else {
+                    alert('Could not find that address. Please try again.');
+                }
+            });
+        });
+
+        // Find nearest store using browser location
+        document.getElementById('nearest-btn').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    map.setCenter(userLocation);
+                    map.setZoom(10);
+
+                    new google.maps.Marker({
+                        map: map,
+                        position: userLocation,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                        title: 'Your Location'
+                    });
+
+                    findNearestStore(userLocation);
+                }, function() {
+                    alert('Could not get your location. Please enter your address instead.');
+                });
+            } else {
+                alert('Geolocation is not supported by your browser.');
+            }
+        });
+
+        // Calculate distance and find nearest store
+        function findNearestStore(location) {
+            let nearestStore = null;
+            let minDistance = Infinity;
+
+            stores.forEach((store, index) => {
+                const distance = getDistance(
+                    location.lat,
+                    location.lng,
+                    store.lat,
+                    store.lng
+                );
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestStore = index;
+                }
+            });
+
+            if (nearestStore !== null) {
+                // Highlight nearest store
+                const storeElements = document.querySelectorAll('.store-item');
+                storeElements.forEach(el => el.classList.remove('nearest'));
+                storeElements[nearestStore].classList.add('nearest');
+                storeElements[nearestStore].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // Show info window for nearest store
+                google.maps.event.trigger(markers[nearestStore], 'click');
+            }
+        }
+
+        // Calculate distance between two points (Haversine formula)
+        function getDistance(lat1, lon1, lat2, lon2) {
+            const R = 3959; // Radius of Earth in miles
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Get directions to a store
+        function getDirections(storeIndex) {
+            const store = stores[storeIndex];
+            const destination = encodeURIComponent(store.address);
+            window.open(`https://www.google.com/maps/dir/?api=1&destination=${destination}`, '_blank');
+        }
+    </script>
+</body>
+</html>
