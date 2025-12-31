@@ -34,6 +34,81 @@
             <p class="member-note">Members only - <a href="login.html">Login</a> or <a href="signup.html">Sign Up</a> to access</p>
         </section>
 
+        <section class="weather-widget">
+            <h3>🌤️ Hunting Weather Forecast</h3>
+            <p>Check current conditions and forecasts to plan your perfect hunting day!</p>
+
+            <button id="get-weather-btn" class="weather-location-btn">Get Weather for My Location</button>
+
+            <div id="weather-loading" style="display: none;" class="weather-loading">
+                <p>Loading weather data...</p>
+            </div>
+
+            <div id="weather-error" style="display: none;" class="weather-error">
+                <p>Unable to load weather. Please enable location services or try again.</p>
+            </div>
+
+            <div id="weather-content" style="display: none;">
+                <div class="current-weather">
+                    <div class="weather-main">
+                        <div class="weather-icon-temp">
+                            <img id="weather-icon" src="" alt="Weather Icon">
+                            <div class="temperature-display">
+                                <span id="current-temp" class="main-temp">--</span>
+                                <span class="temp-unit">°F</span>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <p id="weather-location" class="location-name">--</p>
+                            <p id="weather-condition" class="condition-text">--</p>
+                            <p id="weather-updated" class="update-time">--</p>
+                        </div>
+                    </div>
+
+                    <div class="hunting-conditions">
+                        <h4>Hunting Conditions</h4>
+                        <div class="condition-grid">
+                            <div class="condition-item">
+                                <span class="condition-label">💨 Wind</span>
+                                <span id="wind-info" class="condition-value">--</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">🌡️ Feels Like</span>
+                                <span id="feels-like" class="condition-value">--°F</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">💧 Humidity</span>
+                                <span id="humidity" class="condition-value">--%</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">🌅 Sunrise</span>
+                                <span id="sunrise" class="condition-value">--</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">🌆 Sunset</span>
+                                <span id="sunset" class="condition-value">--</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">🌙 Moon Phase</span>
+                                <span id="moon-phase" class="condition-value">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="weather-alerts" class="weather-alerts" style="display: none;">
+                    <!-- Weather alerts will be inserted here -->
+                </div>
+
+                <div class="forecast-section">
+                    <h4>3-Day Forecast</h4>
+                    <div id="forecast-container" class="forecast-grid">
+                        <!-- Forecast cards will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section>
             <h3>Hunting Tips</h3>
             <ul>
@@ -59,5 +134,122 @@
     <footer>
         <p>&copy; 2025 Outdoor Gear & Apparel. All rights reserved.</p>
     </footer>
+
+    <script>
+        // WeatherAPI.com API Key - Replace with your actual key
+        const WEATHER_API_KEY = 'YOUR_WEATHER_API_KEY_HERE';
+        const WEATHER_API_URL = 'https://api.weatherapi.com/v1';
+
+        document.getElementById('get-weather-btn').addEventListener('click', getWeatherByLocation);
+
+        function getWeatherByLocation() {
+            if (navigator.geolocation) {
+                document.getElementById('weather-loading').style.display = 'block';
+                document.getElementById('weather-error').style.display = 'none';
+                document.getElementById('get-weather-btn').style.display = 'none';
+
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        fetchWeatherData(`${lat},${lon}`);
+                    },
+                    error => {
+                        document.getElementById('weather-loading').style.display = 'none';
+                        document.getElementById('weather-error').style.display = 'block';
+                        document.getElementById('get-weather-btn').style.display = 'block';
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by your browser');
+            }
+        }
+
+        async function fetchWeatherData(location) {
+            try {
+                // Fetch current weather and forecast
+                const response = await fetch(
+                    `${WEATHER_API_URL}/forecast.json?key=${WEATHER_API_KEY}&q=${location}&days=3&aqi=no&alerts=yes`
+                );
+
+                if (!response.ok) {
+                    throw new Error('Weather data not available');
+                }
+
+                const data = await response.json();
+                displayWeather(data);
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+                document.getElementById('weather-loading').style.display = 'none';
+                document.getElementById('weather-error').style.display = 'block';
+                document.getElementById('get-weather-btn').style.display = 'block';
+            }
+        }
+
+        function displayWeather(data) {
+            document.getElementById('weather-loading').style.display = 'none';
+            document.getElementById('weather-content').style.display = 'block';
+
+            const current = data.current;
+            const location = data.location;
+            const forecast = data.forecast.forecastday;
+
+            // Current weather
+            document.getElementById('weather-icon').src = 'https:' + current.condition.icon;
+            document.getElementById('current-temp').textContent = Math.round(current.temp_f);
+            document.getElementById('weather-location').textContent = `${location.name}, ${location.region}`;
+            document.getElementById('weather-condition').textContent = current.condition.text;
+            document.getElementById('weather-updated').textContent = `Updated: ${new Date(location.localtime).toLocaleTimeString()}`;
+
+            // Hunting conditions
+            document.getElementById('wind-info').textContent = `${current.wind_mph} mph ${current.wind_dir}`;
+            document.getElementById('feels-like').textContent = `${Math.round(current.feelslike_f)}°F`;
+            document.getElementById('humidity').textContent = `${current.humidity}%`;
+            document.getElementById('sunrise').textContent = forecast[0].astro.sunrise;
+            document.getElementById('sunset').textContent = forecast[0].astro.sunset;
+            document.getElementById('moon-phase').textContent = forecast[0].astro.moon_phase;
+
+            // Weather alerts
+            if (data.alerts && data.alerts.alert && data.alerts.alert.length > 0) {
+                const alertsContainer = document.getElementById('weather-alerts');
+                alertsContainer.innerHTML = '<h4>⚠️ Weather Alerts</h4>';
+                data.alerts.alert.forEach(alert => {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert-item';
+                    alertDiv.innerHTML = `
+                        <strong>${alert.event}</strong>
+                        <p>${alert.headline}</p>
+                        <p class="alert-time">Effective: ${new Date(alert.effective).toLocaleString()}</p>
+                    `;
+                    alertsContainer.appendChild(alertDiv);
+                });
+                alertsContainer.style.display = 'block';
+            }
+
+            // 3-day forecast
+            const forecastContainer = document.getElementById('forecast-container');
+            forecastContainer.innerHTML = '';
+
+            forecast.forEach((day, index) => {
+                const date = new Date(day.date);
+                const dayName = index === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
+
+                const forecastCard = document.createElement('div');
+                forecastCard.className = 'forecast-card';
+                forecastCard.innerHTML = `
+                    <p class="forecast-day">${dayName}</p>
+                    <img src="https:${day.day.condition.icon}" alt="${day.day.condition.text}">
+                    <p class="forecast-condition">${day.day.condition.text}</p>
+                    <p class="forecast-temp">
+                        <span class="temp-high">${Math.round(day.day.maxtemp_f)}°</span> /
+                        <span class="temp-low">${Math.round(day.day.mintemp_f)}°</span>
+                    </p>
+                    <p class="forecast-detail">💧 ${day.day.daily_chance_of_rain}% rain</p>
+                    <p class="forecast-detail">💨 ${Math.round(day.day.maxwind_mph)} mph wind</p>
+                `;
+                forecastContainer.appendChild(forecastCard);
+            });
+        }
+    </script>
 </body>
 </html>
